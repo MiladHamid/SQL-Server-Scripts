@@ -1,0 +1,36 @@
+Monitoring the Performance of All Stored Procedures 
+
+
+Every Project suffer from this problem, over the time they have developed many stored procedure and their versions. No one is actually sure about their utilization and performance. Use this very simple SQL Script and generate a report with all the information you required. You can modify the script as per your need like order by execution_count so you can identify most used ones or use a date range in filter criteria to narrow down your search.  
+
+
+SELECT
+O.Name As 'StoredProcName',
+O.object_id,
+ps.execution_count,
+CAST(ROUND((ps.lASt_elapsed_time/1000000.00),4)AS NUMERIC(8,4)) AS 'Last_elapsed_time_In_Sec',
+ps.lASt_execution_time as 'Last_execution_time',
+ps.lASt_logical_reads as 'Last_logical_reads',
+ps.lASt_logical_writes as 'Last_logical_writes',
+ps.lASt_physical_reads as 'Last_physical_reads',
+CAST(ROUND((ps.lASt_worker_time/1000000.00),4)AS NUMERIC(8,4)) AS 'Last_worker_time_In_Sec' ,
+CAST(ROUND((ps.max_elapsed_time/1000000.00),4)AS NUMERIC(8,4)) AS 'Max_elapsed_time_In_Sec',
+ps.max_logical_reads,
+ps.max_logical_writes,
+ps.max_physical_reads,
+CAST(ROUND((ps.max_worker_time/1000000.00),4)AS NUMERIC(8,4)) AS 'Max_worker_time_In_Sec',
+CAST(ROUND((ps.min_elapsed_time/1000000.00),4)AS NUMERIC(8,4)) AS 'Min_elapsed_time_In_Sec' ,
+ps.min_logical_reads,
+ps.min_logical_writes,
+ps.min_physical_reads,
+CAST(ROUND((ps.min_worker_time/1000000.00),4)AS NUMERIC(8,4)) AS 'Min_worker_time_In_Sec',
+CAST(ROUND((ps.total_elapsed_time/1000000.00),4)AS NUMERIC(8,4)) AS 'Total_elapsed_time_In_Sec' ,
+ps.total_logical_reads,
+ps.total_logical_writes,
+ps.total_physical_reads,
+CAST(ROUND((ps.total_worker_time/1000000.00),4)AS NUMERIC(8,4)) AS 'Total_worker_time_In_Sec'
+FROM Sys.objects O left join sys.dm_exec_procedure_stats ps on O.name=OBJECT_NAME(ps.object_id,ps.databASe_id)
+WHERE O.TYPE='P'
+ORDER BY O.Name
+
+
