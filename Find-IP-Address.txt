@@ -1,3 +1,4 @@
+--Find IP address for the sql server
 SELECT  
    CONNECTIONPROPERTY('net_transport') AS net_transport,
    CONNECTIONPROPERTY('protocol_type') AS protocol_type,
