@@ -1,0 +1,33 @@
+sp_who2
+dbcc inputbuffer(spid)
+sp_helptext 'procname'
+
+Sp_whoisactive
+
+dbcc sqlperf('logspace')
+
+dbcc opentran
+
+sp_helpdb [DBA]
+
+--https://msdn.microsoft.com/en-us/library/ms178534.aspx
+select log_reuse_wait_desc,* from sys.databases
+--Log shring
+--Checkpoint
+--logbackup
+--replication 
+
+select * from sys.tables
+select * from sys.all_views
+
+--https://msdn.microsoft.com/en-us/library/ms190324.aspx
+select * from sys.objects
+where type='p'
+
+exec xP_readerrorlog
+
+dbcc tracestatus
+
+
+DBCC TRACEON (1222, -1)
+DBCC TRACEoff (1222, -1)
