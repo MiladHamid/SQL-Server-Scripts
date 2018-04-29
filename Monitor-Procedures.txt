@@ -1,4 +1,4 @@
--- Monitoring the Performance of All Stored Procedures 
+-- Monitoring the Performance of All Stored Procedures in SQL Server 
 /* Every Project suffer from this problem, over the time they have developed many stored procedure and their versions. No one is actually sure about their utilization and performance. Use this very simple SQL Script and generate a report with all the information you required. You can modify the script as per your need like order by execution_count so you can identify most used ones or use a date range in filter criteria to narrow down your search.*/  
 
 -- Run the script 
